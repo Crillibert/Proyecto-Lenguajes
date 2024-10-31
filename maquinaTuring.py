@@ -1,5 +1,7 @@
+
 import re
-from graphviz import Digraph
+#from graphviz import Digraph
+
 
 # Genera tabla de frecuencia para imprimir
 def generarTabla(mensaje):
@@ -99,7 +101,7 @@ def obtener_siguiente_estado(estado_actual, caracter):
         return '4'  # Estado de error
 
 # Función para generar el árbol de derivación
-def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el árbol de derivación
+"""def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el árbol de derivación
     dot = Digraph(comment=f'Árbol de Derivación - Cadena {numero}')
     dot.attr(rankdir='TB')  # Establece la dirección del gráfico de arriba hacia abajo (Top To Bottom)
 
@@ -125,7 +127,7 @@ def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el 
         dot.node(f"{estado_actual}", estado_actual, color='red', style='filled') #Rojo si no se llega al estado de aceptación
 
     #  # Genera el archivo del árbol de derivación en formato PNG y limpia los archivos temporales que cera grapviz para renderizar la imagen.
-    dot.render(f'arbol_derivacion_cadena_{numero}', format='png', cleanup=True)
+    dot.render(f'arbol_derivacion_cadena_{numero}', format='png', cleanup=True)"""
 
 patron = re.compile("(.*a)(.*b)(a)(b\2|a*\*)(#+|a\2|b\3)")
 print("\nValidación de cadenas:")
@@ -136,17 +138,32 @@ try:
             cadena = line.strip()
             cintaInpar = ""
             cintaPar = ""
-            if re.fullmatch(patron, cadena):
-                print(f"Cadena {numero}: {cadena}")
+            par = False
+            for z in cadena:
+                if par:
+                    cintaPar += z
+                else: 
+                    cintaInpar += z
+                par = not par
+                
+                #generar_arbol_derivacion(cadena, numero)  # Generar árbol
+
+            if re.fullmatch(patron, cintaPar):
+                print(f"Cadena {numero}: {cintaPar}")
                 print('---Es válido---')
                 print('Tabla de transiciones:\n')
-                pila = generarTabla(cadena)
-                
-                generar_arbol_derivacion(cadena, numero)  # Generar árbol
+                pila = generarTabla(cintaPar)
+
+            if re.fullmatch(patron, cintaInpar):
+                print(f"Cadena {numero}: {cintaInpar}")
+                print('---Es válido---')
+                print('Tabla de transiciones:\n')
+                pila = generarTabla(cintaInpar)
+
             else:
                 print(f"Cadena {numero}: {cadena}")
                 print('---No es válido---\n')
-                generar_arbol_derivacion(cadena, numero)  # Generar árbol   
+                #generar_arbol_derivacion(cadena, numero)  # Generar árbol   
 except FileNotFoundError:
     print("Error: No se pudo encontrar el archivo 'cadena.txt'.")
 except IOError:
