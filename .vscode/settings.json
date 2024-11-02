@@ -1,0 +1,8 @@
+{
+    "python.analysis.include": [
+        "C:\\Users\\Gabriel\\myenv\\Lib\\site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "c:\\users\\gabriel\\appdata\\local\\packages\\pythonsoftwarefoundation.python.3.12_qbz5n2kfra8p0\\localcache\\local-packages\\python312\\site-packages"
+    ]
+}

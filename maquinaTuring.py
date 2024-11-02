@@ -1,7 +1,7 @@
-
+import sys
 import re
-#from graphviz import Digraph
-
+print (sys.path)
+from graphviz import Digraph
 
 # Genera tabla de frecuencia para imprimir
 def generarTabla(mensaje):
@@ -22,9 +22,6 @@ def generarTabla(mensaje):
 
                 # Generar pilas errores 
                 pilaErrores.append(i)
-             
-
-         
         
         elif estado == "1":
             tabla[0].append(i)
@@ -101,7 +98,7 @@ def obtener_siguiente_estado(estado_actual, caracter):
         return '4'  # Estado de error
 
 # Función para generar el árbol de derivación
-"""def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el árbol de derivación
+def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el árbol de derivación
     dot = Digraph(comment=f'Árbol de Derivación - Cadena {numero}')
     dot.attr(rankdir='TB')  # Establece la dirección del gráfico de arriba hacia abajo (Top To Bottom)
 
@@ -127,11 +124,11 @@ def obtener_siguiente_estado(estado_actual, caracter):
         dot.node(f"{estado_actual}", estado_actual, color='red', style='filled') #Rojo si no se llega al estado de aceptación
 
     #  # Genera el archivo del árbol de derivación en formato PNG y limpia los archivos temporales que cera grapviz para renderizar la imagen.
-    dot.render(f'arbol_derivacion_cadena_{numero}', format='png', cleanup=True)"""
+    dot.render(f'arbol_derivacion_cadena_{numero}', format='png', cleanup=True)
 
 patron = re.compile("(.*a)(.*b)(a)(b\2|a*\*)(#+|a\2|b\3)")
 print("\nValidación de cadenas:")
-
+simbolos = ['a', 'b', '*', '#', '.']
 try:
     with open("cadena.txt", 'r') as reader:
         for numero, line in enumerate(reader.readlines(), 1):
@@ -148,17 +145,31 @@ try:
                 
                 #generar_arbol_derivacion(cadena, numero)  # Generar árbol
 
+            if re.fullmatch(patron, cadena):
+                print(f"Cadena {numero}: {cadena}")
+                print('---Es válido---')
+                print('Tabla de transiciones:\n')
+                pila = generarTabla(cadena)
+                
+                generar_arbol_derivacion(cadena, numero)  # Generar árbol
+
             if re.fullmatch(patron, cintaPar):
+                cinta1 = []
                 print(f"Cadena {numero}: {cintaPar}")
                 print('---Es válido---')
                 print('Tabla de transiciones:\n')
                 pila = generarTabla(cintaPar)
+                for s in cintaPar:
+                    cinta1.append(s)
 
             if re.fullmatch(patron, cintaInpar):
+                cinta2 = []
                 print(f"Cadena {numero}: {cintaInpar}")
                 print('---Es válido---')
                 print('Tabla de transiciones:\n')
                 pila = generarTabla(cintaInpar)
+                for s in cintaInpar:
+                    cinta2.append(s)
 
             else:
                 print(f"Cadena {numero}: {cadena}")
