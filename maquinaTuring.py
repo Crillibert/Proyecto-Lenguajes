@@ -128,6 +128,8 @@ def generar_arbol_derivacion(cadena, numero):  # Crea un nuevo gráfico para el 
 patron = re.compile("(.*a)(.*b)(a)(b\2|a*\*)(#+|a\2|b\3)")
 print("\nValidación de cadenas:")
 simbolos = ['a', 'b', '*', '#', '.']
+print("Se mueve de izquierda a derecha ambas cintas")
+print(simbolos)
 try:
     with open("nuevaCadena.txt", 'r') as reader:
         for numero, line in enumerate(reader.readlines(), 1):
@@ -144,13 +146,6 @@ try:
                 
                 #generar_arbol_derivacion(cadena, numero)  # Generar árbol
 
-            if re.fullmatch(patron, cadena):
-                print(f"Cadena {numero}: {cadena}")
-                print('---Es válido---')
-                print('Tabla de transiciones:\n')
-                pila = generarTabla(cadena)
-                
-                generar_arbol_derivacion(cadena, numero)  # Generar árbol
 
             if re.fullmatch(patron, cintaPar):
                 cinta1 = []
@@ -160,6 +155,7 @@ try:
                 pila = generarTabla(cintaPar)
                 for s in cintaPar:
                     cinta1.append(s)
+                generar_arbol_derivacion(cinta1, numero)  # Generar árbol
 
             if re.fullmatch(patron, cintaInpar):
                 cinta2 = []
@@ -169,6 +165,7 @@ try:
                 pila = generarTabla(cintaInpar)
                 for s in cintaInpar:
                     cinta2.append(s)
+                generar_arbol_derivacion(cinta2, numero)  # Generar árbol
 
             else:
                 print(f"Cadena {numero}: {cadena}")
