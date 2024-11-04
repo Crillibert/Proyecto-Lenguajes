@@ -1,6 +1,5 @@
-import sys
+
 import re
-print (sys.path)
 from graphviz import Digraph
 
 # Genera tabla de frecuencia para imprimir

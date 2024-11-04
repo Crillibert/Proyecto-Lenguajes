@@ -1,11 +1,11 @@
-aba*#
+vvaba*#
 abaaa*#
-abaaa*##
-abaa*#
-abaaaa*#
+abaaa*#
+axbaa*#
+abaaa*#
 aba*###
 abaa*#bba*#
-abaaa*bbaa*#
+abaa*bbaa*#
 ababba*bbaa*#
 abaaaa*aa*bba*#
 abaaabbaa*####
