@@ -129,7 +129,7 @@ patron = re.compile("(.*a)(.*b)(a)(b\2|a*\*)(#+|a\2|b\3)")
 print("\nValidación de cadenas:")
 simbolos = ['a', 'b', '*', '#', '.']
 try:
-    with open("cadena.txt", 'r') as reader:
+    with open("nuevaCadena.txt", 'r') as reader:
         for numero, line in enumerate(reader.readlines(), 1):
             cadena = line.strip()
             cintaInpar = ""
