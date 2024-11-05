@@ -149,7 +149,7 @@ try:
 
             if re.fullmatch(patron, cintaPar):
                 cinta1 = []
-                print(f"Cadena {numero}: {cintaPar}")
+                print(f"Cadena Cinta 1: {numero}: {cintaPar}")
                 print('---Es válido---')
                 print('Tabla de transiciones:\n')
                 pila = generarTabla(cintaPar)
@@ -159,7 +159,7 @@ try:
 
             if re.fullmatch(patron, cintaInpar):
                 cinta2 = []
-                print(f"Cadena {numero}: {cintaInpar}")
+                print(f"Cadena Cinta 2: {numero}: {cintaInpar}")
                 print('---Es válido---')
                 print('Tabla de transiciones:\n')
                 pila = generarTabla(cintaInpar)
@@ -167,8 +167,12 @@ try:
                     cinta2.append(s)
                 generar_arbol_derivacion(cinta2, numero)  # Generar árbol
 
-            else:
-                print(f"Cadena {numero}: {cadena}")
+            if not re.fullmatch(patron, cintaPar):
+                print(f"Cadena Cinta 1 {numero}: {cintaPar}")
+                print('---No es válido---\n')
+                #generar_arbol_derivacion(cadena, numero)  # Generar árbol   
+            if not re.fullmatch(patron, cintaInpar):
+                print(f"Cadena Cinta 2 {numero}: {cintaInpar}")
                 print('---No es válido---\n')
                 #generar_arbol_derivacion(cadena, numero)  # Generar árbol   
 except FileNotFoundError:
